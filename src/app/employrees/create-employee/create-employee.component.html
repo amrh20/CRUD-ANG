@@ -1,0 +1,55 @@
+<div class="container">
+  <form #employeeForm="ngForm" (ngSubmit)="saveEmployee(employeeForm)">
+    <div class="form-group">
+      <label for="fullname">full name</label>
+      <input type="text" name="fullname" [(ngModel)]="fullname" id="fullname" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="fullname">email</label>
+      <input type="email" name="email" [(ngModel)]="email" id="email" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="phoneNumber">phone Number</label>
+      <input type="phoneNumber" name="phoneNumber" 
+      [(ngModel)]="phoneNumber" id="phoneNumber" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="gender">contact Preference</label>
+      <label for="phone">
+        <input type="radio" name="contactPreference" id="phone" value="phone"
+        [(ngModel)]="contactPreference">
+        phone
+      </label>
+      <label for="email">
+        <input type="radio" name="contactPreference" id="email" value="email"
+        [(ngModel)]="contactPreference">
+        email
+      </label>
+    </div>
+    <div class="form-group">
+      <label for="gender">Gender</label>
+      <label for="male">
+        <input type="radio" name="gender" id="male" value="Male"
+        [(ngModel)]="gender">
+        male
+      </label>
+      <label for="female">
+        <input type="radio" name="gender" id="female" value="Female"
+        [(ngModel)]="gender">
+        female
+      </label>
+    </div>
+    <div class="form-group">
+
+      <label for="isActive">
+        <input type="checkbox" name="isActive" id="isActive" 
+        [(ngModel)]="isActive">
+        is Active
+      </label>
+     
+    </div>
+    <button class="btn btn-primary" type="submit">save</button>
+  </form>
+</div>
+
+{{employeeForm.value | json}}
