@@ -7,14 +7,16 @@
        id="fullname" class="form-control">
        <span *ngIf="fullnamecontrol.invalid && fullnamecontrol.touched">full name is required</span>
     </div>
-    <div class="form-group" >
+    <div class="form-group" [class.has-error]="emailControll?.errors.required && emailControll.touched">
       <label for="fullname">Email</label>
-      <input type="email" name="email" [(ngModel)]="email" 
+      <input type="email" name="email"
+      [(ngModel)]="email" #emailControll="ngModel" required
       id="email" class="form-control">
+      <span *ngIf="emailControll?.errors.required && emailControll.touched">email is required</span>
     </div>
     <div class="form-group">
       <label for="phoneNumber">Phone Number</label>
-      <input type="phoneNumber" name="phoneNumber" 
+      <input type="phoneNumber" name="phoneNumber"  required
       [(ngModel)]="phoneNumber" id="phoneNumber" class="form-control">
     </div>
     <div class="form-group">
@@ -43,18 +45,23 @@
         email
       </label>
     </div>
-    <div class="form-group">
+    <div class="form-group" [class.has-error]="geneder.touched && geneder.invalid">
       <label for="gender">Gender</label>
       <label for="male">
-        <input type="radio" name="gender" id="male" value="Male"
+        <input type="radio" name="gender" 
+        required #geneder="ngModel"
+        id="male" value="Male"
         [(ngModel)]="gender">
         male
       </label>
       <label for="female">
-        <input type="radio" name="gender" id="female" value="Female"
+        <input type="radio" name="gender" 
+        required #geneder="ngModel"
+        id="female" value="Female"
         [(ngModel)]="gender">
         female
       </label>
+      <span *ngIf="geneder.touched && geneder.invalid" style="display:block">gender is required</span>
     </div>
     <div class="form-group">
       <label for="isActive">

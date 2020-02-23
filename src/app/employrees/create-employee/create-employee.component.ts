@@ -1,7 +1,6 @@
-import { Department } from './../../../../.history/src/app/models/department.model_20200223105120';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-
+import { Department } from '../../models/department.model';
 @Component({
   selector: 'app-create-employee',
   templateUrl: './create-employee.component.html',
