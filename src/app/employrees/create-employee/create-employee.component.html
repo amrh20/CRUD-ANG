@@ -1,20 +1,37 @@
 <div class="container">
   <form #employeeForm="ngForm" (ngSubmit)="saveEmployee(employeeForm)">
-    <div class="form-group">
-      <label for="fullname">full name</label>
-      <input type="text" name="fullname" [(ngModel)]="fullname" id="fullname" class="form-control">
+    <div class="form-group" [class.has-error]="fullnamecontrol.invalid && fullnamecontrol.touched">
+      <label for="fullname">Full name</label>
+      <input type="text" name="fullname" [(ngModel)]="fullname"
+       #fullnamecontrol="ngModel" required
+       id="fullname" class="form-control">
+       <span *ngIf="fullnamecontrol.invalid && fullnamecontrol.touched">full name is required</span>
+    </div>
+    <div class="form-group" >
+      <label for="fullname">Email</label>
+      <input type="email" name="email" [(ngModel)]="email" 
+      id="email" class="form-control">
     </div>
     <div class="form-group">
-      <label for="fullname">email</label>
-      <input type="email" name="email" [(ngModel)]="email" id="email" class="form-control">
-    </div>
-    <div class="form-group">
-      <label for="phoneNumber">phone Number</label>
+      <label for="phoneNumber">Phone Number</label>
       <input type="phoneNumber" name="phoneNumber" 
       [(ngModel)]="phoneNumber" id="phoneNumber" class="form-control">
     </div>
     <div class="form-group">
-      <label for="gender">contact Preference</label>
+      <label for="photopath">Photo Path</label>
+      <input type="photopath" name="photopath" 
+      [(ngModel)]="photopath" id="photopath" class="form-control">
+    </div>
+     <div class="form-group">
+       <button class="btn btn-primary" type="button" (click)="toggleShowImg()">
+           {{previewPhoto ? "Hide" : "Show"}} image
+       </button>
+     </div>
+    <div class="form-group" *ngIf="previewPhoto">
+    <img [src]=photopath alt="photopath" height="200px" width="200px" > 
+    </div>
+    <div class="form-group">
+      <label for="gender">Contact Preference</label>
       <label for="phone">
         <input type="radio" name="contactPreference" id="phone" value="phone"
         [(ngModel)]="contactPreference">
@@ -40,15 +57,26 @@
       </label>
     </div>
     <div class="form-group">
-
       <label for="isActive">
         <input type="checkbox" name="isActive" id="isActive" 
         [(ngModel)]="isActive">
         is Active
       </label>
-     
     </div>
-    <button class="btn btn-primary" type="submit">save</button>
+    <div class="form-group">
+      <label for="department">Department</label>
+      <select name="department" id="department" [(ngModel)]="department">
+        <option *ngFor="let departmant of departmants" [value]="departmant.id">{{departmant.name}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="fullname">date of birth</label>
+      <input type="date" name="dateofbirth" [(ngModel)]="dateofbirth"
+       id="dateofbirth" class="form-control">
+    </div>
+
+    <button class="btn btn-primary" type="submit" [disabled]="employeeForm.invalid">save</button>
   </form>
 </div>
 
