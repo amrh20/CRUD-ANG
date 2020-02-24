@@ -7,44 +7,53 @@
        id="fullname" class="form-control">
        <span *ngIf="fullnamecontrol.invalid && fullnamecontrol.touched">full name is required</span>
     </div>
-    <div class="form-group" [class.has-error]="emailControll?.errors.required && emailControll.touched">
-      <label for="fullname">Email</label>
-      <input type="email" name="email"
-      [(ngModel)]="email" #emailControll="ngModel" required
-      id="email" class="form-control">
-      <span *ngIf="emailControll?.errors.required && emailControll.touched">email is required</span>
+    
+    <div class="form-group" [class.has-error]="emailControl.invalid">
+      <label for="email">Email</label>
+      <input type="text" name="email" [(ngModel)]="email" 
+       #emailControl="ngModel" [required]="contactPreferenceControl.value=='email'"
+       id="email" class="form-control">
+       <span *ngIf="emailControl.errors?.required">email is required</span>
     </div>
-    <div class="form-group">
+
+    <div class="form-group" [class.has-error]="phoneControl.invalid">
       <label for="phoneNumber">Phone Number</label>
-      <input type="phoneNumber" name="phoneNumber"  required
+      <input type="phoneNumber" name="phoneNumber"
+      #phoneControl="ngModel" [required]="contactPreferenceControl.value=='phone'"
       [(ngModel)]="phoneNumber" id="phoneNumber" class="form-control">
+      <span *ngIf="phoneControl.invalid">phone number is required</span>
     </div>
+
     <div class="form-group">
       <label for="photopath">Photo Path</label>
       <input type="photopath" name="photopath" 
       [(ngModel)]="photopath" id="photopath" class="form-control">
     </div>
+
      <div class="form-group">
        <button class="btn btn-primary" type="button" (click)="toggleShowImg()">
            {{previewPhoto ? "Hide" : "Show"}} image
        </button>
      </div>
+
     <div class="form-group" *ngIf="previewPhoto">
     <img [src]=photopath alt="photopath" height="200px" width="200px" > 
     </div>
+
     <div class="form-group">
       <label for="gender">Contact Preference</label>
       <label for="phone">
         <input type="radio" name="contactPreference" id="phone" value="phone"
-        [(ngModel)]="contactPreference">
+        [(ngModel)]="contactPreference" #contactPreferenceControl="ngModel">
         phone
       </label>
       <label for="email">
         <input type="radio" name="contactPreference" id="email" value="email"
-        [(ngModel)]="contactPreference">
+        [(ngModel)]="contactPreference" #contactPreferenceControl="ngModel">
         email
       </label>
     </div>
+
     <div class="form-group" [class.has-error]="geneder.touched && geneder.invalid">
       <label for="gender">Gender</label>
       <label for="male">
@@ -63,18 +72,29 @@
       </label>
       <span *ngIf="geneder.touched && geneder.invalid" style="display:block">gender is required</span>
     </div>
-    <div class="form-group">
+
+    <div class="form-group" [class.has-error]="isActiveControl.invalid && isActiveControl.touched">
       <label for="isActive">
         <input type="checkbox" name="isActive" id="isActive" 
+        #isActiveControl="ngModel" required
         [(ngModel)]="isActive">
         is Active
       </label>
+      <span *ngIf="isActiveControl.errors?.required && isActiveControl.touched" style="display: block;">checkbox is required</span>
     </div>
-    <div class="form-group">
+
+    <div class="form-group" 
+    [class.has-erorr]="department.invalid && department.touched">
       <label for="department">Department</label>
-      <select name="department" id="department" [(ngModel)]="department">
+      <select name="department" id="department" 
+      [(ngModel)]="employee.department" #department="ngModel" required>
+        <option disabled [ngValue]="null">select departmant</option>
         <option *ngFor="let departmant of departmants" [value]="departmant.id">{{departmant.name}}</option>
       </select>
+      <span *ngIf="department.invalid && department.touched" 
+                   style="display: block;color: red;">
+        Department is required
+      </span>
     </div>
 
     <div class="form-group">
@@ -88,3 +108,4 @@
 </div>
 
 {{employeeForm.value | json}}
+{{employee | json}}
