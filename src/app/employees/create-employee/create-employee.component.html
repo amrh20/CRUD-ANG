@@ -1,8 +1,8 @@
 <div class="container">
-  <form #employeeForm="ngForm" (ngSubmit)="saveEmployee(employeeForm)">
+  <form #employeeForm="ngForm" (ngSubmit)="saveEmployee()">
     <div class="form-group" [class.has-error]="fullnamecontrol.invalid && fullnamecontrol.touched">
       <label for="fullname">Full name</label>
-      <input type="text" name="fullname" [(ngModel)]="fullname"
+      <input type="text" name="fullname" [(ngModel)]="employee.name"
        #fullnamecontrol="ngModel" required
        id="fullname" class="form-control">
        <span *ngIf="fullnamecontrol.invalid && fullnamecontrol.touched">full name is required</span>
@@ -10,7 +10,7 @@
     
     <div class="form-group" [class.has-error]="emailControl.invalid">
       <label for="email">Email</label>
-      <input type="text" name="email" [(ngModel)]="email" 
+      <input type="text" name="email" [(ngModel)]="employee.email" 
        #emailControl="ngModel" [required]="contactPreferenceControl.value=='email'"
        id="email" class="form-control">
        <span *ngIf="emailControl.errors?.required">email is required</span>
@@ -20,14 +20,14 @@
       <label for="phoneNumber">Phone Number</label>
       <input type="phoneNumber" name="phoneNumber"
       #phoneControl="ngModel" [required]="contactPreferenceControl.value=='phone'"
-      [(ngModel)]="phoneNumber" id="phoneNumber" class="form-control">
+      [(ngModel)]="employee.phoneNumber" id="phoneNumber" class="form-control">
       <span *ngIf="phoneControl.invalid">phone number is required</span>
     </div>
 
     <div class="form-group">
       <label for="photopath">Photo Path</label>
-      <input type="photopath" name="photopath" 
-      [(ngModel)]="photopath" id="photopath" class="form-control">
+      <input type="text" name="photopath" 
+      [(ngModel)]="employee.photoPath" id="photopath" class="form-control">
     </div>
 
      <div class="form-group">
@@ -36,20 +36,46 @@
        </button>
      </div>
 
+
     <div class="form-group" *ngIf="previewPhoto">
     <img [src]=photopath alt="photopath" height="200px" width="200px" > 
+    </div>
+
+    <div ngModelGroup="passwordGroup" 
+         [class.has-error]="passwordControl.value != confirmPasswordControl.value && confirmPasswordControl.touched && passwordControl.touched">
+
+    <div class="form-group" [class.has-error]="passwordControl.touched && passwordControl.invalid">
+      <label for="password"> Password</label>
+      <input type="password" name="password" class="form-control" required
+      [(ngModel)]="employee.password" #passwordControl="ngModel">
+      <span *ngIf="passwordControl.errors?.required && passwordControl.touched">
+        password is required
+      </span>
+    </div>
+    
+    <div class="form-group" [class.has-error]="confirmPasswordControl.touched && confirmPasswordControl.invalid">
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" name="confirmPassword" class="form-control" required
+      [(ngModel)]="employee.confirmPassword" #confirmPasswordControl="ngModel">
+      <span *ngIf="confirmPasswordControl.errors?.required && confirmPasswordControl.touched">
+        confirmPassword is required
+      </span>
+      <span style="display: block;color: red;"
+      *ngIf="passwordControl.value != confirmPasswordControl.value && confirmPasswordControl.touched">passwords not match</span>
+    </div>
+
     </div>
 
     <div class="form-group">
       <label for="gender">Contact Preference</label>
       <label for="phone">
         <input type="radio" name="contactPreference" id="phone" value="phone"
-        [(ngModel)]="contactPreference" #contactPreferenceControl="ngModel">
+        [(ngModel)]="employee.contactPreference" #contactPreferenceControl="ngModel">
         phone
       </label>
       <label for="email">
         <input type="radio" name="contactPreference" id="email" value="email"
-        [(ngModel)]="contactPreference" #contactPreferenceControl="ngModel">
+        [(ngModel)]="employee.contactPreference" #contactPreferenceControl="ngModel">
         email
       </label>
     </div>
@@ -60,14 +86,14 @@
         <input type="radio" name="gender" 
         required #geneder="ngModel"
         id="male" value="Male"
-        [(ngModel)]="gender">
+        [(ngModel)]="employee.gender">
         male
       </label>
       <label for="female">
         <input type="radio" name="gender" 
         required #geneder="ngModel"
         id="female" value="Female"
-        [(ngModel)]="gender">
+        [(ngModel)]="employee.gender">
         female
       </label>
       <span *ngIf="geneder.touched && geneder.invalid" style="display:block">gender is required</span>
@@ -77,7 +103,7 @@
       <label for="isActive">
         <input type="checkbox" name="isActive" id="isActive" 
         #isActiveControl="ngModel" required
-        [(ngModel)]="isActive">
+        [(ngModel)]="employee.isActive">
         is Active
       </label>
       <span *ngIf="isActiveControl.errors?.required && isActiveControl.touched" style="display: block;">checkbox is required</span>
@@ -99,7 +125,7 @@
 
     <div class="form-group">
       <label for="fullname">date of birth</label>
-      <input type="date" name="dateofbirth" [(ngModel)]="dateofbirth"
+      <input type="date" name="dateofbirth" [(ngModel)]="employee.dateofbirth"
        id="dateofbirth" class="form-control">
     </div>
 

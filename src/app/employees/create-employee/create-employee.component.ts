@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Department } from '../../models/department.model';
 import { Employee } from './../../models/employee.model';
+import { EmployeeService } from '../employee.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-create-employee',
   templateUrl: './create-employee.component.html',
@@ -29,13 +31,15 @@ export class CreateEmployeeComponent implements OnInit {
       photoPath: null
     }
   
-  constructor() { }
+  constructor(private _employeeService:EmployeeService,
+    private _router:Router) { }
 
   ngOnInit() {
   }
 
-  saveEmployee(empForm: NgForm): void {
-    console.log(empForm.value);
+  saveEmployee() {
+    this._employeeService.saveEmployee(this.employee);
+    this._router.navigate(['list'])
   }
   toggleShowImg() {
     this.previewPhoto = !this.previewPhoto
