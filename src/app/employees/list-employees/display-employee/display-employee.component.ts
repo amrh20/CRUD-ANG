@@ -1,5 +1,10 @@
+// detec change for input >> from parent to child
+
+// 1- ngchange
+// 2- getter and setter
+
 import { Employee } from './../../../models/employee.model';
-import { Component, OnInit, Input,OnChanges, SimpleChange } from '@angular/core';
+import { Component, OnInit, Input,OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-display-employee',
@@ -7,18 +12,32 @@ import { Component, OnInit, Input,OnChanges, SimpleChange } from '@angular/core'
   styleUrls: ['./display-employee.component.scss']
 })
 export class DisplayEmployeeComponent implements OnInit, OnChanges {
-  @Input () employee: Employee;
+  @Input() employee: Employee;
+  @Output() notify: EventEmitter<string>= new EventEmitter<string>();
+  private _employee:Employee;
+  
+  // getter and setter
+  // @Input() 
+  // 1- set employee(val :Employee) {
+  //   console.log('Previous : ' + (this._employee ? this._employee.name : 'Null'))
+  //   console.log('Current : ' + val.name)
+  //   this._employee= val
+  // }
+  // get employee(): Employee {
+  //   return this._employee;
+  // }
   constructor() { }
-
   ngOnInit() {
   }
     
- ngOnChanges(changes :SimpleChange) {
-   const prevEmployee= <Employee>changes.employee.previousValue;
-   const cuurentEmployee= <Employee>changes.employee.currentValue;
-
-   console.log("prev Employee: " + (prevEmployee ? prevEmployee.name : 'Null'))
-   console.log("cuurent Employee: " + cuurentEmployee.name )
-  console.log(changes)
+  // 2-ngOnchanges
+   ngOnChanges( changes: SimpleChanges ) : void {
+  //  const prevEmployee= <Employee>changes.employee.previousValue;
+  //  const cuurentEmployee= <Employee>changes.employee.currentValue;
+  //  console.log("prev Employee: " + (prevEmployee ? prevEmployee.name : 'Null'))
+  //  console.log("cuurent Employee: " + cuurentEmployee.name )
+ }
+ handelData() {
+   this.notify.emit(this.employee.name)
  }
 }

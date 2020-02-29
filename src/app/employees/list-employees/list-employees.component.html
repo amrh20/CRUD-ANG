@@ -1,10 +1,16 @@
-<!-- <div class="container">
-  <div class="panel panel-primary" *ngFor="let employee of employees">
-  <app-display-employee [employee]="employee"></app-display-employee>
- </div>
-</div> -->
-
 <div class="container">
+  <h1>{{presentData}}</h1>
+  <div class="panel panel-primary" *ngFor="let employee of employees">
+    <div  (click)="employeeDetails(employee.id)">
+      <app-display-employee [employee]="employee" (notify)="handelData($event)"></app-display-employee>
+    </div>
+ </div>
+</div>
+
+
+
+<!-- dy lw 3ayz a4of 7war ngonchanges vs gettter and setter -->
+<!-- <div class="container">
   <app-display-employee [employee]="displayEmployee"></app-display-employee>
 </div>
 
@@ -12,4 +18,4 @@
   <button class="btn btn-primary" (click)="seeNext()">
     See Next One
   </button>
-</div>
+</div> -->

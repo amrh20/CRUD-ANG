@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Department } from '../../models/department.model';
 import { Employee } from './../../models/employee.model';
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./create-employee.component.scss']
 })
 export class CreateEmployeeComponent implements OnInit {
-
+  @ViewChild('employeeForm') public createEmployeeForm:NgForm;
   previewPhoto= false;
   departmants: Department[] =[
     { id:1, name: 'It'},

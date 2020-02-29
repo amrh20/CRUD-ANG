@@ -45,6 +45,9 @@ export class EmployeeService {
 getEmployess() :Employee[] {
     return this.listemployess
 }
+getEmployee(id: number) :Employee {
+  return this.listemployess.find(e => e.id === id)
+}
 saveEmployee(employee: Employee) {
     this.listemployess.push(employee)
   }
