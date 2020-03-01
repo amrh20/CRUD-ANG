@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 // detec change for input >> from parent to child
 
 // 1- ngchange
@@ -15,7 +16,7 @@ export class DisplayEmployeeComponent implements OnInit, OnChanges {
   @Input() employee: Employee;
   @Output() notify: EventEmitter<string>= new EventEmitter<string>();
   private _employee:Employee;
-  
+  private _selectedId:number;
   // getter and setter
   // @Input() 
   // 1- set employee(val :Employee) {
@@ -26,8 +27,9 @@ export class DisplayEmployeeComponent implements OnInit, OnChanges {
   // get employee(): Employee {
   //   return this._employee;
   // }
-  constructor() { }
+  constructor(private _router:ActivatedRoute) { }
   ngOnInit() {
+    this._selectedId= +this._router.snapshot.paramMap.get('id')
   }
     
   // 2-ngOnchanges
@@ -40,4 +42,5 @@ export class DisplayEmployeeComponent implements OnInit, OnChanges {
  handelData() {
    this.notify.emit(this.employee.name)
  }
+
 }

@@ -1,6 +1,10 @@
+
+
 <div class="container">
+  <input type="text" placeholder="search by name" 
+       [(ngModel)]="searchTerm" class="form-control"/>
   <h1>{{presentData}}</h1>
-  <div class="panel panel-primary" *ngFor="let employee of employees">
+  <div class="panel panel-primary" *ngFor="let employee of filteredemployees">
     <div  (click)="employeeDetails(employee.id)">
       <app-display-employee [employee]="employee" (notify)="handelData($event)"></app-display-employee>
     </div>

@@ -11,6 +11,7 @@ import { EmployeeService } from './employees/employee.service';
 import { DisplayEmployeeComponent } from './employees/list-employees/display-employee/display-employee.component';
 import { CreateEmployeeDeactiveCard } from './employees/create-employe-can-deactive-card.service';
 import { EmployeeDetailsComponent } from './employees/employee-details/employee-details.component';
+import { EmployeeFilterPipe } from './employees/employee-filter.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,6 +19,7 @@ import { EmployeeDetailsComponent } from './employees/employee-details/employee-
     CreateEmployeeComponent,
     DisplayEmployeeComponent,
     EmployeeDetailsComponent,
+    EmployeeFilterPipe,
     
   ],
   imports: [

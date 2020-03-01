@@ -38,7 +38,9 @@ export class CreateEmployeeComponent implements OnInit {
   }
 
   saveEmployee() {
-    this._employeeService.saveEmployee(this.employee);
+    const employee= Object.assign({}, this.employee);
+    this._employeeService.saveEmployee(employee);
+    this.createEmployeeForm.reset();
     this._router.navigate(['list'])
   }
   toggleShowImg() {

@@ -1,5 +1,5 @@
 <div (click)="handelData()">
-<div class="panel-heading">
+<div class="panel-heading" [class.selected]="_selectedId === employee.id">
   <h3 class="panel-title">
     {{employee.name}}
   </h3>
