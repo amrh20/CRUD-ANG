@@ -28,7 +28,9 @@ export class ListEmployeesComponent implements OnInit {
   }
   constructor(private _employessService:EmployeeService,
               private _router:Router) { 
-    this.employees= this._employessService.getEmployess()
+    this._employessService.getEmployess().subscribe(data => {
+      this.employees= data
+    })
   }
 
   ngOnInit() {
@@ -50,6 +52,8 @@ export class ListEmployeesComponent implements OnInit {
     this.presentData= event;
   }
   employeeDetails(employeeId) {
-  this._router.navigate(['/employees',employeeId])
+  this._router.navigate(['/employees',employeeId],{
+    queryParams: {'searchTerm': this.searchTerm, 'testParam': 'testValue'}
+  })
   }
 }

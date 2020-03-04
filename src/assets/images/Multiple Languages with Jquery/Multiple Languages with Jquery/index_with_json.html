@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Multiple Languages with Jquery and Json</title>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script type="text/javascript">
+    var arrLang = {
+      'en': {
+        'home': 'Home',
+        'about': 'About Us',
+        'contact': 'Contact Us',
+        'desc': 'This is my description',
+        'product_name': 'product name'
+      },
+      'ar': {
+        'home': 'الرئيسيه',
+        'about': 'عننا',
+        'contact': 'اتصل بنا',
+        'desc': 'الوصف',
+        'product_name': 'اسم المنتج'
+      }
+    };
+
+    // Process translation
+    $(function() {
+      $('.translate').click(function() {
+        var lang = $(this).attr('id');
+
+        $('.lang').each(function(index, item) {
+          $(this).text(arrLang[lang][$(this).attr('key')]);
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+  <button id="en" class="translate">English</button>
+  <button id="ar" class="translate">arabic</button>
+
+  <ul>
+    <li class="lang" key="home">Home</li>
+    <li class="lang" key="about">About Us</li>
+    <li class="lang" key="contact">Contact Us</li>
+    <li class="lang" key="product_name">product name</li>
+  </ul>
+  <p class="lang" key="desc">This is my description</p>
+
+</body>
+</html>
