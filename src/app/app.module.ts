@@ -1,34 +1,51 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 
-import { AppComponent } from './app.component';
-import { ListEmployeesComponent } from './employees/list-employees/list-employees.component';
-import { CreateEmployeeComponent } from './employees/create-employee/create-employee.component';
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule } from '@angular/forms';
-import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
-import { EmployeeService } from './employees/employee.service';
-import { DisplayEmployeeComponent } from './employees/list-employees/display-employee/display-employee.component';
-import { CreateEmployeeDeactiveCard } from './employees/create-employe-can-deactive-card.service';
-import { EmployeeDetailsComponent } from './employees/employee-details/employee-details.component';
-import { EmployeeFilterPipe } from './employees/employee-filter.pipe';
+import { AppComponent } from './app.component';
+import { SharedModule } from './Shared/shared.module';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { LoginComponent } from './pages/login/login.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatMenuModule} from '@angular/material/menu';
+import { AdminModule } from './modules/admin/admin.module';
+
+
 @NgModule({
   declarations: [
     AppComponent,
-    ListEmployeesComponent,
-    CreateEmployeeComponent,
-    DisplayEmployeeComponent,
-    EmployeeDetailsComponent,
-    EmployeeFilterPipe,
-    
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    SharedModule,
+    BrowserAnimationsModule,
+    CarouselModule,
+    AdminModule,
+    HttpClientModule,
+    MatMenuModule,
     FormsModule,
-    BsDatepickerModule.forRoot()
+    ReactiveFormsModule,
+    TranslateModule.forRoot({
+      defaultLanguage: 'ar',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient],
+      },
+
+    })
   ],
-  providers: [EmployeeService,CreateEmployeeDeactiveCard],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}

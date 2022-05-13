@@ -1,0 +1,79 @@
+@import "../../../assets/scss/varaibles.scss";
+:host {
+    .footer-wrapper {
+        background-color: #f6f5f4;
+        padding: 60px 0 0 0;
+        .footer-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 30px;
+            div {
+                flex: 1;
+                h2 {
+                    font-size: 20px;
+                    font-weight: bold;
+                    color: #616a72;
+                    height: 50px;
+                    margin-right: 22px;
+                    [dir="ltr"] & {
+                        margin-right: 0;
+                        margin-left: 22px;
+                    }
+                }
+            }
+
+            .links {
+                ul li {
+                    font-size: 18px;
+                    font-weight: bold;
+                    color: $black;
+                    margin-bottom: 10px;
+                    list-style: none;
+                    position: relative;
+                    a {
+                        font-size: 16px;
+                        text-transform: capitalize;
+                    }
+                    &::after {
+                        position: absolute;
+                        content: "";
+                        background-image: url("../../../assets/images/marke.png");
+                        height: 20px;
+                        width: 20px;
+                        background-repeat: no-repeat;
+                        right: -25px;
+                        top: 8px;
+                        [dir="ltr"] & {
+                            right: auto;
+                            left: -35px;
+                            transform: rotate(180deg);
+                            top: -4px;
+                        }
+                    }
+                }
+            }
+        }
+        .copy-right {
+            border-top: 1px solid #eaeaea;
+            display: flex;
+            justify-content: space-between;
+            padding: 30px 0;
+            span {
+                color: #6f7474;
+                font-size: 14px;
+                margin-left: 18px;
+                // &:last-of-type {
+                //     margin-left: 0;
+                //     margin-right: 20px;
+                // }
+            }
+        }
+        .footer-logo {
+            p {
+                color: #616a72;
+                font-size: 12px;
+            }
+        }
+    }
+}

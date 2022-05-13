@@ -1,0 +1,31 @@
+stages:
+  - testing
+  - building
+  - deployment
+before_script:
+  ##
+  ## Run ssh-agent (inside the build environment)
+  ##
+  - eval $(ssh-agent -s)
+  - ssh-add <(echo "$SSH_InvestAC_Key")
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
+continuous_testing_to_dev:
+  stage: testing
+  tags:
+    - acinvestdev
+  script:
+    - ssh -t -t root@168.119.186.146 -o StrictHostKeyChecking=no "cd /var/www/html/dev.ac.invest.is.sa/test-code && git stash && git pull origin development && npm install && npm i && ng build && exit "
+
+continuous_building_to_dev:
+  stage: building
+  tags:
+    - acinvestdev
+  script:
+    - ssh -t -t root@168.119.186.146 -o StrictHostKeyChecking=no "cd /var/www/html/dev.ac.invest.is.sa/main && git stash && git pull origin development && npm install && exit "
+continuous_deployment_to_dev:
+  stage: deployment
+  tags:
+    - acinvestdev
+  script:
+    - ssh -t -t root@168.119.186.146 -o StrictHostKeyChecking=no "cd /var/www/html/dev.ac.invest.is.sa/main  && npm i && ng build && chown -R www-data:www-data dist && exit "

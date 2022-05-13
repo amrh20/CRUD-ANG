@@ -1,0 +1,70 @@
+$black: #111111;
+$white: #ffffff;
+$main-color: #3471c1;
+$second-color: #a5926e;
+$third-color :#616a72;
+$colors: (
+    black: $black,
+    white: $white,
+    main-color: $main-color,
+    second-color: $second-color,
+    third-color :$third-color
+);
+
+$font-size-base: 16;
+
+@mixin colors-bg-text {
+    @for $i from 1 through length($colors) {
+        $key: nth($colors, $i);
+        $value: nth($key, 2);
+        .bg-color-#{"" + nth($key, 1)} {
+            background-color: $value !important;
+        }
+        .bg-color-hover-#{"" + nth($key, 1)} {
+            &:hover,
+            &.nav-link.active {
+                background-color: $value !important;
+            }
+        }
+        .bg-color-hover-#{"" + nth($key, 1)}-imp {
+            &:before {
+                content: "";
+                width: 0;
+                height: 100%;
+                position: absolute;
+                background-color: $value !important;
+                transition: all 0.3s ease-in-out;
+            }
+            &:hover,
+            &.nav-link.active,
+            &.nav-link[aria-expanded="true"] {
+                &:before {
+                    width: 100%;
+                }
+            }
+        }
+        .text-color-#{"" + nth($key, 1)} {
+            color: $value !important;
+        }
+        .bg-color-#{"" + nth($key, 1)}-imp {
+            background-color: $value !important;
+        }
+        .text-color-#{"" + nth($key, 1)}-imp {
+            color: $value !important;
+        }
+
+        .#{"" + nth($key, 1)}-checkbox.mat-accent {
+            .mat-checkbox-frame {
+                border-color: $value !important;
+            }
+
+            &.mat-checkbox-checked {
+                .mat-checkbox-background {
+                    background-color: $value !important;
+                }
+            }
+        }
+    }
+}
+
+@include colors-bg-text;

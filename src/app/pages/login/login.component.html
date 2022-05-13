@@ -1,0 +1,55 @@
+<div class="login">
+
+    <div class="login-box">
+        <h1>
+            سجل الدخول في
+            <span>Egypt Cars</span>
+        </h1>
+        <div class="login-form">
+
+            <form [formGroup]="loginForm">
+
+                <div>
+                    <label for="">البريد الالكتروني </label>
+                    <input type="text" placeholder=" البريد الالكتروني " formControlName="email" class="numbers-font">
+                </div>
+
+                <div class="error_validation" *ngIf="loginForm.controls.email?.errors &&
+                (loginForm.controls.email?.dirty ||
+                loginForm.controls.email?.touched)">
+                    هذا الحقل مطلوب
+                </div>
+
+                <div class="password-input">
+                    <label for=""> كلمة المرور</label>
+                    <input [type]="show ? 'text' : 'password'" placeholder=" كلمة المرور" formControlName="password"
+                        class="numbers-font">
+
+                    <p (click)="showpassword()" class="icons m-0">
+                        <img src="../../../assets/images/eye-slash-solid.svg" alt="" *ngIf="!show" class="eye-icons">
+                        <img src="../../../assets/images/eye-solid.svg" alt="" *ngIf="show" class="eye-icons">
+                    </p>
+
+                </div>
+
+
+                <div class="error_validation" *ngIf="loginForm.controls.password?.errors &&
+                (loginForm.controls.password?.dirty ||
+                loginForm.controls.password?.touched)">
+                    هذا الحقل مطلوب
+                </div>
+
+
+
+                <button class="filled-button" [disabled]="!loginForm.valid" (click)="login()">
+                    تسجيل دخول
+                </button>
+            </form>
+        </div>
+    </div>
+
+
+    <img src="../../../assets/images/undraw_heavy.svg" alt="" class="img1">
+    <img src="../../../assets/images/undraw_navigator.svg" alt="" class="img2">
+    <!-- <img src="../../../assets/images/logo.png" alt=""> -->
+</div>
